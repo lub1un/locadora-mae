@@ -1,20 +1,18 @@
-import express from "express";
-import connectDB from "./config/db.js";
-import userRoutes from "./routes/user-routes.js";
-import movieRoutes from "./routes/movie-routes.js";
-import rentedRoutes from "./routes/rented-routes.js";
-import dotenv from "dotenv";
+import express from 'express';
+import connectDB from './config/db.js';
+import vehicleRouter from './routers/vehicle-router.js';
+import workshopRouter from './routers/workshop-router.js';
+import maintenanceRouter from './routers/maintenance-router.js';
 
-dotenv.config();
+
 connectDB();
 
 const app = express();
-const PORT = process.env.PORT || 3000;
-
 app.use(express.json());
 
-app.use("/api/users", userRoutes);
-app.use("/api/movies", movieRoutes);
-app.use("/api/rented", rentedRoutes);
+app.use('/vehicles', vehicleRouter);
+app.use('/workshops', workshopRouter);
+app.use('/maintenances', maintenanceRouter);
 
-app.listen(PORT, () => console.log(`Servidor rodando na porta ${PORT}`));
+app.listen(3000, () => console.log('Server is running on port 3000'));
+
